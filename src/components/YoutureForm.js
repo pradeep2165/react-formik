@@ -1,18 +1,36 @@
 import React from "react";
 import { useFormik } from "formik";
 
+const initialValues = {
+  name: "",
+  email: "",
+  channel: "",
+};
+const onSubmit = (values) => {
+  console.log("from data", values);
+};
+const validate = (values) => {
+  let errors = {};
+  if (!values.name) {
+    errors.name = "required";
+  }
+  if (!values.email) {
+    errors.name = "required";
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = "Invalid email format";
+  }
+
+  if (!values.channel) {
+    errors.name = "required";
+  }
+  return errors;
+};
 function YoutubeForm() {
   const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      channel: "",
-    },
-    onSubmit: (values) => {
-      console.log("from data", values);
-    },
+    initialValues,
+    onSubmit,
+    validate,
   });
-  console.log("form values", formik.values);
   return (
     <div>
       <form action="" onSubmit={formik.handleSubmit}>
