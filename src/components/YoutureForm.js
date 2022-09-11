@@ -31,24 +31,24 @@ function YoutubeForm() {
     onSubmit,
     validate,
   });
-  console.log("formik error", formik.errors);
+  console.log("Visited field", formik.touched);
   return (
     <div>
       <form action="" onSubmit={formik.handleSubmit}>
         <div className="form-control">
           <label htmlFor="name">Name</label>
-          <input type="text" name="name" value={formik.values.name} onChange={formik.handleChange} />
-          {formik.errors.name ? <div className="errors">{formik.errors.name}</div> : null}
+          <input type="text" name="name" value={formik.values.name} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+          {formik.errors.name && formik.touched.name ? <div className="errors">{formik.errors.name}</div> : null}
         </div>
         <div className="form-control">
           <label htmlFor="email">Email</label>
-          <input type="email" name="email" value={formik.values.email} onChange={formik.handleChange} />
-          {formik.errors.email ? <div className="errors">{formik.errors.email}</div> : null}
+          <input type="email" name="email" value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+          {formik.errors.email && formik.touched.email ? <div className="errors">{formik.errors.email}</div> : null}
         </div>
         <div className="form-control">
           <label htmlFor="channel">Channel</label>
-          <input type="text" name="channel" value={formik.values.channel} onChange={formik.handleChange} />
-          {formik.errors.channel ? <div className="errors">{formik.errors.channel}</div> : null}
+          <input type="text" name="channel" value={formik.values.channel} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+          {formik.errors.channel && formik.touched.channel ? <div className="errors">{formik.errors.channel}</div> : null}
         </div>
         <button type="submit">Submit</button>
       </form>
