@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import TextError from "./TextError";
@@ -9,6 +9,19 @@ const initialValues = {
   channel: "",
   comments: "",
   address: "",
+  social: {
+    facebook: "",
+    twitter: "",
+  },
+  phoneNumbers: ["", ""],
+  phNumbers: [""],
+};
+const savedValues = {
+  name: "pradeep",
+  email: "learnwithpradeep@web.com",
+  channel: "learnwithpradeep",
+  comments: "welcome to formik",
+  address: "bangalore",
   social: {
     facebook: "",
     twitter: "",
@@ -37,10 +50,11 @@ const validateComments = (value) => {
   return error;
 };
 function YoutubeForm() {
+  const [formValues, setFormValues] = useState(null);
   return (
     //validateOnChange={false} validateOnBlur={false}
     //use for not to validate on change/onblur
-    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+    <Formik initialValues={formValues || initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
       {(formik) => {
         console.log("formik props", formik);
         return (
@@ -124,7 +138,7 @@ function YoutubeForm() {
                 }}
               </FieldArray>
             </div>
-            <button type="button" onClick={() => formik.validateField("comments")}>
+            {/* <button type="button" onClick={() => formik.validateField("comments")}>
               Validate comments
             </button>
             <button type="button" onClick={() => formik.validateForm()}>
@@ -146,6 +160,9 @@ function YoutubeForm() {
               }
             >
               Visit Field
+            </button> */}
+            <button type="button" onClick={() => setFormValues(savedValues)}>
+              Saved data
             </button>
             <button disabled={!formik.isValid || formik.isSubmitting} type="submit">
               Submit
