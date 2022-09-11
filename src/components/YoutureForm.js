@@ -28,7 +28,9 @@ const validationSchema = Yup.object({
 
 function YoutubeForm() {
   return (
-    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+    //validateOnChange={false} validateOnBlur={false}
+    //use for not to validate on change/onblur
+    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} validateOnChange={false} validateOnBlur={false}>
       <Form>
         <div className="form-control">
           <label htmlFor="name">Name</label>
@@ -53,7 +55,6 @@ function YoutubeForm() {
           <label htmlFor="address">Address</label>
           <FastField name="address">
             {(props) => {
-              console.log("Field Render");
               const { field, form, meta } = props;
               return (
                 <div>
@@ -87,6 +88,7 @@ function YoutubeForm() {
               const { push, remove, form } = fieldArrayProps;
               const { values } = form;
               const { phNumbers } = values;
+              console.log("form error", form.errors);
               return (
                 <div>
                   {phNumbers.map((phNumber, index) => (
