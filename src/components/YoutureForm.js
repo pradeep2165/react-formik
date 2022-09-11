@@ -7,6 +7,7 @@ const initialValues = {
   email: "",
   channel: "",
   comments: "",
+  address: "",
 };
 const onSubmit = (values) => {
   console.log("from data", values);
@@ -39,8 +40,24 @@ function YoutubeForm() {
         </div>
         <div className="'from-control">
           <label htmlFor="comments">Comments</label>
-          <Field component="textarea" name="comments" />
+          <Field as="textarea" name="comments" />
         </div>
+        <div className="'from-control">
+          <label htmlFor="address">Address</label>
+          <Field name="address">
+            {(props) => {
+              console.log(props);
+              const { field, form, meta } = props;
+              return (
+                <div>
+                  <input type="text" id="address" {...field} />
+                  {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+                </div>
+              );
+            }}
+          </Field>
+        </div>
+
         <button type="submit">Submit</button>
       </Form>
     </Formik>
