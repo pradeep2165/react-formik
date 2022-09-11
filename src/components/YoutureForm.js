@@ -39,7 +39,7 @@ function YoutubeForm() {
         </div>
         <div className="'from-control">
           <label htmlFor="comments">Comments</label>
-          <Field as="textarea" name="comments" />
+          <Field component="textarea" name="comments" />
         </div>
         <button type="submit">Submit</button>
       </Form>
